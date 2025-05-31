@@ -1,0 +1,23 @@
+USE mangata_gallo;
+CREATE TABLE IF NOT EXISTS Clients (
+    ClientID INT NOT NULL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Phone INT NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Items (
+    ItemID INT NOT NULL PRIMARY KEY,
+    ItemName VARCHAR(100) NOT NULL,
+    Price DECIMAL (5,2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Orders (
+    OrderID INT NOT NULL PRIMARY KEY,
+    ClientID INT NOT NULL,
+    ItemID INT NOT NULL,
+    Quantity INT NOT NULL,
+    Cost DECIMAL (6,2) NOT NULL,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    FOREIGN KEY (ItemID) REFERENCES Items(ItemID),
+    CHECK (Quantity <= 3)
+);
